@@ -28,6 +28,16 @@ const GET_QUESTIONS = async (req, res) => {
   }
 };
 
+const GET_QUESTION_BY_ID = async (req, res) => {
+  try {
+    const question = await QuestionModel.findOne({ _id: req.params.id });
+    return res.status(200).json({ question: question });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ message: "Server Error" });
+  }
+};
+
 const DELETE_QUESTION = async (req, res) => {
   try {
     const response = await QuestionModel.deleteOne({ _id: req.params.id });
@@ -38,4 +48,4 @@ const DELETE_QUESTION = async (req, res) => {
   }
 };
 
-export { ADD_QUESTION, GET_QUESTIONS, DELETE_QUESTION };
+export { ADD_QUESTION, GET_QUESTIONS, GET_QUESTION_BY_ID, DELETE_QUESTION };
