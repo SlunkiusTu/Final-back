@@ -1,4 +1,5 @@
 import QuestionModel from "../models/question.js";
+import AnswerModel from "../models/answer.js";
 
 const ADD_QUESTION = async (req, res) => {
   try {
@@ -40,8 +41,15 @@ const GET_QUESTION_BY_ID = async (req, res) => {
 
 const DELETE_QUESTION = async (req, res) => {
   try {
-    const response = await QuestionModel.deleteOne({ _id: req.params.id });
-    return res.status(200).json({ response: response });
+    const deleteQuestion = await QuestionModel.deleteOne({
+      _id: req.params.id,
+    });
+    if (deleteQuestion) {
+      await AnswerModel.deleteMany({ question_id: req.params.id });
+      return res.status(200).json({ message: "deleted" });
+    } else {
+      return res.status(404).json({ message: "Smf went wrong" });
+    }
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Server Error" });
