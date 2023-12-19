@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import cors from "cors";
 import questionRouter from "./src/routes/questions.js";
 import answerRouter from "./src/routes/answers.js";
+import userRouter from "./src/routes/user.js";
 
 import "dotenv/config";
 
@@ -11,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(questionRouter);
 app.use(answerRouter);
+app.use(userRouter);
 
 mongoose
   .connect(process.env.MONGO_CONNECTION)
