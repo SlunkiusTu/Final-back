@@ -8,6 +8,7 @@ const ADD_ANSWER = async (req, res) => {
       answer_text: req.body.answer_text,
       date: req.body.date,
       question_id: req.params.id,
+      user_id: req.body.user_id,
     });
 
     const response = await answer.save();

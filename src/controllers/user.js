@@ -49,7 +49,11 @@ const LOGIN = async (req, res) => {
 
     return res
       .status(200)
-      .json({ message: "user was login successfully ", token: token });
+      .json({
+        message: "user was login successfully ",
+        token: token,
+        userId: user._id,
+      });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ message: "Smf wrong" });

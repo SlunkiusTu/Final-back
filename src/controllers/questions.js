@@ -7,7 +7,7 @@ const ADD_QUESTION = async (req, res) => {
       question_title: req.body.question_title,
       question_text: req.body.question_text,
       date: req.body.date,
-      user_id: req.body.userId,
+      user_id: req.body.user_id,
     });
 
     const response = await question.save();
