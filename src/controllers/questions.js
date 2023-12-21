@@ -21,8 +21,27 @@ const ADD_QUESTION = async (req, res) => {
 
 const GET_QUESTIONS = async (req, res) => {
   try {
-    const questions = await QuestionModel.find();
-    return res.status(200).json({ questions: questions });
+    const questionsWithCounts = await QuestionModel.aggregate([
+      {
+        $lookup: {
+          from: "answers",
+          localField: "_id",
+          foreignField: "question_id",
+          as: "answers",
+        },
+      },
+      {
+        $project: {
+          question_title: 1,
+          question_text: 1,
+          date: 1,
+          user_id: 1,
+          answersCount: { $size: "$answers" },
+        },
+      },
+    ]);
+
+    return res.status(200).json({ questions: questionsWithCounts });
   } catch (error) {
     console.log(error);
     return res.status(500).json({ message: "Server Error" });
