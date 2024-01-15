@@ -19,13 +19,13 @@ Frontend'e naudosime React. Kaip ir backend'e node express, taip pat galima naud
 
 ### Backend'as
 
-POST /register
-POST /login
+* POST /register
+* POST /login
 
-GET /questions
-POST /question
-DELETE /question/:id
+* GET /questions
+* POST /question
+* DELETE /question/:id
 
-GET /question/:id/answers
-POST /question/:id/answers
-DELETE /answer/:id
+* GET /question/:id/answers
+* POST /question/:id/answers
+* DELETE /answer/:id
